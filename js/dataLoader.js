@@ -3,20 +3,20 @@
  */
 //Loads and parses json files from local storage
 
-var dataLoader = function () {
+var DataLoader = function () {
     THREE.Loader.call( this, false );
 
     this.withCredentials = false;
 };
 
-dataLoader.prototype = Object.create(THREE.Loader.prototype);
+DataLoader.prototype = Object.create(THREE.Loader.prototype);
 
-dataLoader.prototype.load = function(url, callback) {
+DataLoader.prototype.load = function(url, callback) {
     this.onLoadStart();
     this.loadAjaxJSON(this, url, callback);
 };
 
-dataLoader.prototype.loadAjaxJSON = function(context, url, callback) {
+DataLoader.prototype.loadAjaxJSON = function(context, url, callback) {
     var xhr = new XMLHttpRequest();
 
     var callbackProgress = null;
@@ -30,10 +30,10 @@ dataLoader.prototype.loadAjaxJSON = function(context, url, callback) {
             if ( xhr.status === 200 || xhr.status === 0 ) {
 
                 if ( xhr.responseText ) {
-
-                    var json = JSON.parse( xhr.responseText );
-
-                    callback( json );
+                    //let parser = new DOMParser();
+                    //let text = parser.parseFromString(xhr.responseText, "text/xml");
+                    let text = xhr.responseText;
+                    callback( text );
 
                 } else {
 

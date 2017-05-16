@@ -6,6 +6,9 @@
 
     <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/three84.js"></script>
+    <script type="text/javascript" src="js/dataLoader.js"></script>
+    <script type="text/javascript" src="js/fileManager.js"></script>
     <script type="text/javascript" src="js/driveSim.js"></script>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -22,7 +25,25 @@
         <p>
             Select the configuration file for the project
         </p>
-        <span id="chooseFile" class="btn btn-primary btn-file">Load<input type="file"></span>
+        <span id="chooseFile" class="btn btn-primary btn-file">Load<input id="myFile" type="file"></span>
+    </div>
+
+    <div id="projectInfo" class="indent noDisplay menu">
+        <h2>
+            Project : <span id="project"></span>
+        </h2>
+        <div>
+            <button type="button" class="btn btn-primary">Interaction</button>
+        </div>
+        <div>
+            <button type="button" class="btn btn-primary">Scene</button>
+        </div>
+        <div>
+            <button type="button" class="btn btn-primary">Scenario</button>
+        </div>
+        <div>
+            <button type="button" class="btn btn-primary">Settings</button>
+        </div>
     </div>
 </body>
 </html>

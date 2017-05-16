@@ -10,7 +10,7 @@
     position: absolute;
 }
 .indent {
-    margin: 0 1%;
+    margin: 0 3%;
 }
 .btn-file {
     position: relative;
@@ -30,4 +30,7 @@
     background: white;
     cursor: inherit;
     display: block;
+}
+.menu button {
+    margin-bottom: 1%;
 }
