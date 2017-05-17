@@ -2,74 +2,105 @@
  * Created by DrTone on 16/05/2017.
  */
 
-function loadNewFile(file) {
-    if(!file) {
-        alert("No file selected!");
+function onProjectFileLoaded(data) {
+    if(!data) {
+        alert("No file data!");
         return;
     }
 
-    window.URL = window.URL || window.webkitURL;
+    //Validate file settings
+    let xmlDoc = $.parseXML(data);
+    let index = data.indexOf("scene.xml");
+    if(index >=0) {
+        data = data.replace("scene.xml", "tony.xml");
+    }
+    let contents = $(xmlDoc);
+    let status = $('#projectStatus');
+    let valid = contents.find("properties").length;
+    if(valid) {
+        console.log("Valid file");
+    } else {
+        console.log("Invalid project file");
+        status.html("Invalid project file");
+        return;
+    }
 
-    let fileUrl = window.URL.createObjectURL(file);
-    let dataLoader = new DataLoader();
-    dataLoader.load(fileUrl, data => {
-        //Validate file settings
-        //let parser = new DOMParser();
-        //let xml = parser.parseFromString(text, 'text/xml');
-        let projectInfo = $('#projectInfo');
-        let project = $('#project');
-        let buttons = $('#projectButtons');
-        let xmlDoc = $.parseXML(data);
-        let contents = $(xmlDoc);
-        let valid = contents.find("properties").length;
-        if(valid) {
-            console.log("Valid file");
-        } else {
-            console.log("Invalid project file");
-            projectInfo.show();
-            project.html("Invalid project file");
-            buttons.hide();
-            return;
-        }
+    //Show project name
+    let fileName = $('#projectInputFile').val();
+    fileName = fileName.split(/(\\|\/)/g).pop();
+    fileName = fileName.substr(0, fileName.length-4);
+    status.html(fileName);
+    $('#editProject').show();
 
-        //Show project name
-        buttons.show();
-        let fileName = $('#myFile').val();
-        fileName = fileName.split(/(\\|\/)/g).pop();
-        fileName = fileName.substr(0, fileName.length-4);
-        project.html(fileName);
-        projectInfo.show();
-
-        //Get all project files
-        let projectFiles = contents.find("entry");
-        let i, numFiles = projectFiles.length;
-        if(numFiles === 0) {
-            alert("No project files!");
-            return;
-        }
-
-        let fileInfo = {};
-        let key, xmlFile;
-        for(i=0; i<numFiles; ++i) {
-            key = $(projectFiles[i]).attr('key');
-            xmlFile = $(projectFiles[i]).html();
-            fileInfo[key] = xmlFile;
-        }
-
-        loadProjectFiles(fileInfo);
-    });
+    let bb = window.Blob;
+    let filename = "testData.xml";
+    saveAs(new bb(
+        [data]
+        , {type: "text/plain;charset=" + document.characterSet}
+        )
+        , filename);
 }
 
+function onSettingsFileLoaded(data) {
+    if(!data) {
+        alert("No file data!");
+        return;
+    }
+
+    //Show project name
+    let status = $('#settingsStatus');
+    let fileName = $('#settingsInputFile').val();
+    fileName = fileName.split(/(\\|\/)/g).pop();
+    status.html(fileName);
+    $('#editSettings').show();
+}
+
+function editProjectSettings() {
+    $('#mainMenu').hide();
+    $('#editProjectSettings').show();
+}
+
+function backToMainMenu() {
+    $('#editProjectSettings').hide();
+    $('#mainMenu').show();
+}
+
+let fileManager;
 $(document).ready( () => {
-    let fileManager = new FileManager();
+    fileManager = new FileManager();
 
     if(!fileManager.init()) {
         alert("File Manager cannot start!");
         return;
     }
 
-    $("#chooseFile").on("change", evt => {
-        loadNewFile(fileManager.onSelectFile(evt));
+    $("#projectFile").on("change", evt => {
+        fileManager.loadFile(evt, onProjectFileLoaded);
     });
+
+    $("#settingsFile").on("change", evt => {
+        fileManager.loadFile(evt, onSettingsFileLoaded);
+    });
+
+    $("#sceneFile").on("change", evt => {
+        fileManager.loadFile(evt, onProjectFileLoaded);
+    });
+
+    $("#scenarioFile").on("change", evt => {
+        fileManager.loadFile(evt, onProjectFileLoaded);
+    });
+
+    $("#interactionFile").on("change", evt => {
+        fileManager.loadFile(evt, onProjectFileLoaded);
+    });
+
+    //Edit files
+    $('#editProject').on("click", () => {
+        editProjectSettings();
+    });
+
+    $('#backToMainMenu').on("click", () => {
+        backToMainMenu();
+    })
 });
 

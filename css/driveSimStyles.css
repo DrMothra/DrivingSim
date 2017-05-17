@@ -31,6 +31,6 @@
     cursor: inherit;
     display: block;
 }
-.menu button {
-    margin-bottom: 1%;
+.optionDisplay div {
+    margin-bottom: 2%;
 }
