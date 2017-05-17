@@ -30,8 +30,6 @@ DataLoader.prototype.loadAjaxJSON = function(context, url, callback) {
             if ( xhr.status === 200 || xhr.status === 0 ) {
 
                 if ( xhr.responseText ) {
-                    //let parser = new DOMParser();
-                    //let text = parser.parseFromString(xhr.responseText, "text/xml");
                     let text = xhr.responseText;
                     callback( text );
 
