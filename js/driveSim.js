@@ -162,6 +162,8 @@ $(document).ready( () => {
                 }
             });
 
+            $("#viewPortLeft").slider();
+
             $("#saveFile").on("click", () => {
                 saveFile(xml);
             });
@@ -191,6 +193,6 @@ $(document).ready( () => {
 
     $('.backToMainMenu').on("click", () => {
         backToMainMenu();
-    })
+    });
 });
 

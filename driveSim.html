@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <title>Driving Sim Configuration</title>
 
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/bootstrap-slider.min.css?v=0.1">
+    <link rel='stylesheet' href="css/driveSimStyles.css?v=0.3">
+
     <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-slider.js"></script>
     <script type="text/javascript" src="js/three84.js"></script>
     <script type="text/javascript" src="js/FileSaver.js"></script>
     <script type="text/javascript" src="js/dataLoader.js"></script>
     <script type="text/javascript" src="js/fileManager.js"></script>
-    <script type="text/javascript" src="js/driveSim.js?v=0.1"></script>
-
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link rel='stylesheet' href="css/driveSimStyles.css?v=0.3">
+    <script type="text/javascript" src="js/driveSim.js?v=0.2"></script>
 
 </head>
 <body>
@@ -55,32 +57,71 @@
     <div id="editSettings" class="noDisplay indent">
         <h3>Edit Settings</h3>
         <div class="indent">
-            <form class="form-horizontal" autocomplete="off">
-                <div class="form-group">
-                    <label for="driverName" class="col-md-1 control-label">Driver Name</label>
-                    <div class="col-md-5">
-                        <input type="text" class="form-control" id="driverName">
+            <div>
+                <form class="form-horizontal" autocomplete="off">
+                    <div class="form-group">
+                        <label for="driverName" class="col-md-1 control-label">Driver Name</label>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" id="driverName">
+                        </div>
                     </div>
+                </form>
+                <div class="feedback col-md-offset-1">
+                    <button id="setdriverName" type="button" class="btn btn-primary">Set</button>
+                    <span id="driverNameStatus" class="label label-success"></span>
                 </div>
-            </form>
-            <div class="feedback col-md-offset-1">
-                <button id="setdriverName" type="button" class="btn btn-primary">Set</button>
-                <span id="driverNameStatus" class="label label-success"></span>
             </div>
-            <form class="form-horizontal" autocomplete="off">
-                <div class="form-group">
-                    <label for="showStats" class="col-md-1 control-label">Show Stats</label>
-                    <div class="col-md-5">
-                        <select class="form-control" id="showStats">
-                            <option>true</option>
-                            <option>false</option>
-                        </select>
+            <div>
+                <form class="form-horizontal" autocomplete="off">
+                    <div class="form-group">
+                        <label for="showStats" class="col-md-1 control-label">Show Stats</label>
+                        <div class="col-md-5">
+                            <select class="form-control" id="showStats">
+                                <option>true</option>
+                                <option>false</option>
+                            </select>
+                        </div>
                     </div>
+                </form>
+                <div class="feedback col-md-offset-1">
+                    <button id="setshowStats" type="button" class="btn btn-primary">Set</button>
+                    <span id="showStatsStatus" class="label label-success"></span>
                 </div>
-            </form>
-            <div class="feedback col-md-offset-1">
-                <button id="setshowStats" type="button" class="btn btn-primary">Set</button>
-                <span id="showStatsStatus" class="label label-success"></span>
+            </div>
+            <div>
+                <form class="form-horizontal" autocomplete="off">
+                    <div class="form-group">
+                        <label for="mirrorMode" class="col-md-1 control-label">Mirror Mode</label>
+                        <div class="col-md-5">
+                            <select class="form-control" id="mirrorMode">
+                                <option>off</option>
+                                <option>back_only</option>
+                                <option>side_only</option>
+                                <option>all</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+                <div class="feedback col-md-offset-1">
+                    <button id="setmirrorMode" type="button" class="btn btn-primary">Set</button>
+                    <span id="mirrorModeStatus" class="label label-success"></span>
+                </div>
+            </div>
+            <div>
+                <p>Rear view</p>
+                <form class="form-horizontal" autocomplete="off">
+                    <div class="form-group">
+                        <label for="viewPortLeft" class="col-md-1 control-label">View port left</label>
+                        <div class="col-md-5">
+                            <input id="viewPortLeft" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+                                   data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
+                        </div>
+                    </div>
+                </form>
+                <div class="feedback col-md-offset-1">
+                    <button id="setviewPortLeft" type="button" class="btn btn-primary">Set</button>
+                    <span id="viewPortLeftStatus" class="label label-success"></span>
+                </div>
             </div>
             <div class="feedback col-md-offset-1">
                 <button id="saveFile" type="button" class="btn btn-primary">Save File</button>
