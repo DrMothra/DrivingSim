@@ -10,11 +10,11 @@
     <script type="text/javascript" src="js/FileSaver.js"></script>
     <script type="text/javascript" src="js/dataLoader.js"></script>
     <script type="text/javascript" src="js/fileManager.js"></script>
-    <script type="text/javascript" src="js/driveSim.js"></script>
+    <script type="text/javascript" src="js/driveSim.js?v=0.1"></script>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link rel='stylesheet' href="css/driveSimStyles.css">
+    <link rel='stylesheet' href="css/driveSimStyles.css?v=0.3">
 
 </head>
 <body>
@@ -29,11 +29,11 @@
         <div id="projectButtons" class="optionDisplay">
             <div>
                 <span id="projectFile" class="btn btn-primary btn-file">Load Project File<input type="file" id="projectInputFile"></span>
-                <span id="projectStatus"></span><button id="editProject" type="button" class="noDisplay btn btn-primary">Edit</button>
+                <span id="projectStatus"></span><button id="projectEdit" type="button" class="noDisplay btn btn-primary">Edit</button>
             </div>
             <div>
                 <span id="settingsFile" class="btn btn-primary btn-file">Load Settings File<input type="file" id="settingsInputFile"></span>
-                <span id="settingsStatus"></span><button id="editSettings" type="button" class="noDisplay btn btn-primary">Edit</button>
+                <span id="settingsStatus"></span><button id="settingsEdit" type="button" class="noDisplay btn btn-primary">Edit</button>
             </div>
             <div>
                 <span id="sceneFile" class="btn btn-primary btn-file">Load Scene File<input type="file"></span><span id="sceneStatus"></span>
@@ -49,7 +49,13 @@
 
     <div id="editProjectSettings" class="noDisplay indent">
         <h3>Edit Project Settings</h3>
-        <button type="button" class="btn btn-primary" id="backToMainMenu">Back</button>
+        <button type="button" class="btn btn-primary backToMainMenu">Back</button>
     </div>
+
+    <div id="editSettings" class="noDisplay indent">
+        <h3>Edit Settings</h3>
+        <button type="button" class="btn btn-primary backToMainMenu">Back</button>
+    </div>
+
 </body>
 </html>
