@@ -34,4 +34,11 @@
 .optionDisplay div {
     margin-bottom: 2%;
 }
+.feedback {
+    margin-bottom: 1%;
+}
+.feedback span {
+    font-size: 0.9vw;
+    margin-left: 1%;
+}
 

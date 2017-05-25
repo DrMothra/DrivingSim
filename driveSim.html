@@ -54,6 +54,39 @@
 
     <div id="editSettings" class="noDisplay indent">
         <h3>Edit Settings</h3>
+        <div class="indent">
+            <form class="form-horizontal" autocomplete="off">
+                <div class="form-group">
+                    <label for="driverName" class="col-md-1 control-label">Driver Name</label>
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" id="driverName">
+                    </div>
+                </div>
+            </form>
+            <div class="feedback col-md-offset-1">
+                <button id="setdriverName" type="button" class="btn btn-primary">Set</button>
+                <span id="driverNameStatus" class="label label-success"></span>
+            </div>
+            <form class="form-horizontal" autocomplete="off">
+                <div class="form-group">
+                    <label for="showStats" class="col-md-1 control-label">Show Stats</label>
+                    <div class="col-md-5">
+                        <select class="form-control" id="showStats">
+                            <option>true</option>
+                            <option>false</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+            <div class="feedback col-md-offset-1">
+                <button id="setshowStats" type="button" class="btn btn-primary">Set</button>
+                <span id="showStatsStatus" class="label label-success"></span>
+            </div>
+            <div class="feedback col-md-offset-1">
+                <button id="saveFile" type="button" class="btn btn-primary">Save File</button>
+                <span id="saveFileStatus" class="label label-success"></span>
+            </div>
+        </div>
         <button type="button" class="btn btn-primary backToMainMenu">Back</button>
     </div>
 
