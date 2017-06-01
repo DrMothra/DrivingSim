@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Sim Playback</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel='stylesheet' href="css/driveSimStyles.css?v=0.3">
+
+    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/three84.js"></script>
+    <script type="text/javascript" src="js/TrackballControls.js"></script>
+    <script type="text/javascript" src="js/detector.js"></script>
+    <script type="text/javascript" src="js/FileSaver.js"></script>
+    <script type="text/javascript" src="js/dataLoader.js"></script>
+    <script type="text/javascript" src="js/BinaryLoader.js"></script>
+    <script type="text/javascript" src="js/baseApp.js?v=0.1"></script>
+    <script type="text/javascript" src="js/fileManager.js"></script>
+    <script type="text/javascript" src="js/playBack.js?v=0.8"></script>
+
+</head>
+<body>
+    <div id="information" class="indent infoPanel">
+        <h1>Car Simulator Driving Playback</h1>
+        <p>
+            Select the simulator file you wish to visualise
+        </p>
+        <div>
+            <span id="simFile" class="btn btn-primary btn-file">Load Simulation File<input type="file" id="simInputFile"></span>
+        </div>
+
+        <div id="taskInfo" class="noDisplay">
+            <h3>Task: <span id="task"></span></h3>
+            <h3>Time: <span id="time"></span></h3>
+            <h3>Driver: <span id="driver"></span></h3>
+        </div>
+    </div>
+
+    <div id="WebGL-output">
+
+    </div>
+
+    <div id="notSupported" class="infoPanel noDisplay">
+        <p>
+            WebGL is not supported in your browser!<br>
+            Please update to the latest version of Chrome or Firefox
+        </p>
+    </div>
+</body>
+</html>

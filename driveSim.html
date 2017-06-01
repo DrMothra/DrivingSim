@@ -16,7 +16,7 @@
     <script type="text/javascript" src="js/FileSaver.js"></script>
     <script type="text/javascript" src="js/dataLoader.js"></script>
     <script type="text/javascript" src="js/fileManager.js"></script>
-    <script type="text/javascript" src="js/driveSim.js?v=0.2"></script>
+    <script type="text/javascript" src="js/driveSim.js?v=0.3"></script>
 
 </head>
 <body>
@@ -94,10 +94,10 @@
                         <label for="mirrorMode" class="col-md-1 control-label">Mirror Mode</label>
                         <div class="col-md-5">
                             <select class="form-control" id="mirrorMode">
-                                <option>off</option>
+                                <option>all</option>
                                 <option>back_only</option>
                                 <option>side_only</option>
-                                <option>all</option>
+                                <option>off</option>
                             </select>
                         </div>
                     </div>
@@ -114,13 +114,40 @@
                         <label for="viewPortLeft" class="col-md-1 control-label">View port left</label>
                         <div class="col-md-5">
                             <input id="viewPortLeft" data-slider-id='ex1Slider' type="text" data-slider-min="0"
-                                   data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
+                                   data-slider-max="1" data-slider-step="0.1" data-slider-value="0.25"/>
+                        </div>
+                    </div>
+                </form>
+                <form class="form-horizontal" autocomplete="off">
+                    <div class="form-group">
+                        <label for="viewPortRight" class="col-md-1 control-label">View port right</label>
+                        <div class="col-md-5">
+                            <input id="viewPortRight" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+                                   data-slider-max="1" data-slider-step="0.1" data-slider-value="0.75"/>
+                        </div>
+                    </div>
+                </form>
+                <form class="form-horizontal" autocomplete="off">
+                    <div class="form-group">
+                        <label for="viewPortTop" class="col-md-1 control-label">View port top</label>
+                        <div class="col-md-5">
+                            <input id="viewPortTop" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+                                   data-slider-max="1" data-slider-step="0.1" data-slider-value="0.9"/>
+                        </div>
+                    </div>
+                </form>
+                <form class="form-horizontal" autocomplete="off">
+                    <div class="form-group">
+                        <label for="viewPortBottom" class="col-md-1 control-label">View port bottom</label>
+                        <div class="col-md-5">
+                            <input id="viewPortBottom" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+                                   data-slider-max="1" data-slider-step="0.1" data-slider-value="0.75"/>
                         </div>
                     </div>
                 </form>
                 <div class="feedback col-md-offset-1">
-                    <button id="setviewPortLeft" type="button" class="btn btn-primary">Set</button>
-                    <span id="viewPortLeftStatus" class="label label-success"></span>
+                    <button id="setrearviewMirror" type="button" class="btn btn-primary">Set</button>
+                    <span id="rearviewMirrorStatus" class="label label-success"></span>
                 </div>
             </div>
             <div class="feedback col-md-offset-1">
