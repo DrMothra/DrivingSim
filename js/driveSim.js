@@ -88,18 +88,14 @@ function setProperty(xml, element) {
     //console.log(property.text());
 }
 
-function setMirrorProperty(xml, element) {
-    console.log("Slider = ", sliderRight.slider('getValue'));
+function setSliderProperty(xml, container, sliders, elements) {
     xmlDoc = $(xml);
-    let left = sliderLeft.slider('getValue');
-    let right = sliderRight.slider('getValue');
-    let top = sliderTop.slider('getValue');
-    let bottom = sliderBottom.slider('getValue');
-    xmlDoc.find("viewPortLeft").first().text(left);
-    xmlDoc.find("viewPortRight").first().text(right);
-    xmlDoc.find("viewPortBottom").first().text(bottom);
-    xmlDoc.find("viewPortTop").first().text(top);
-    $('#' + element + "Status").html("Updated");
+    let i, sliderValue, numSliders = sliders.length;
+    for(i=0; i<numSliders; ++i) {
+        sliderValue = sliders[i].slider('getValue');
+        xmlDoc.find(elements[i]).first().text(sliderValue);
+    }
+    $('#' + container + "Status").html("Updated");
 }
 
 function saveFile(xml) {
@@ -168,38 +164,37 @@ $(document).ready( () => {
                 return;
             }
             showFileEdit(fileInfo);
+
             //Set options
-            let inputElems = ["driverName", "showStats", "mirrorMode", "rearviewMirror"];
-            $("#set" + inputElems[0]).on("click", () => {
-                if(validateInput(inputElems[0])) {
-                    setProperty(xml, inputElems[0]);
-                    console.log("Set driver name");
-                }
-            });
+            let inputAttributes = ["driverName", "showStats", "mirrorMode"];
+            let sliderAttributes = ["rearviewMirror"];
+            let sliderElems = ["viewPortLeft", "viewPortRight", "viewPortTop", "viewPortBottom"];
 
-            $("#set" + inputElems[1]).on("click", () => {
-                if(validateInput(inputElems[1])) {
-                    setProperty(xml, inputElems[1]);
-                    console.log("Set stats");
-                }
-            });
+            let numElems = inputAttributes.length;
+            for(let i=0; i<numElems; ++i) {
+                $("#set" + inputAttributes[i]).on("click", () => {
+                    if(validateInput(inputAttributes[i])) {
+                        setProperty(xml, inputAttributes[i]);
+                        console.log("Set driver name");
+                    }
+                });
+            }
 
-            $("#set" + inputElems[2]).on("click", () => {
-                if(validateInput(inputElems[2])) {
-                    setProperty(xml, inputElems[2]);
-                    console.log("Set mirror mode");
-                }
-            });
+            //Set up sliders
+            let sliders = [];
+            let slider, numSliderElems = sliderElems.length;
+            for(slider=0; slider<numSliderElems; ++slider) {
+                sliders.push($("#" + sliderElems[slider]).slider());
+            }
 
-            $("#set" + inputElems[3]).on("click", () => {
-                setMirrorProperty(xml, inputElems[3]);
-                console.log("Set rear view mirror");
-            });
+            let numSliders = sliderAttributes.length;
+            for(let slider=0; slider<numSliders; ++slider) {
+                $("#set" + sliderAttributes[slider]).on("click", () => {
+                    setSliderProperty(xml, sliderAttributes[slider], sliders, sliderElems);
+                })
+            }
 
-            sliderLeft = $("#viewPortLeft").slider();
-            sliderRight = $("#viewPortRight").slider();
-            sliderTop = $("#viewPortTop").slider();
-            sliderBottom = $("#viewPortBottom").slider();
+
 
             $("#saveFile").on("click", () => {
                 saveFile(xml);
