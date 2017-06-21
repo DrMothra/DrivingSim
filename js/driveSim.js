@@ -85,10 +85,9 @@ $(document).ready( () => {
 
             //Set options
             let inputAttributes = ["driverName", "showStats", "mirrorMode"];
-            let sliderAttributes = ["rearviewMirror"];
-            let sliderElems = ["rear_viewPortLeft", "rear_viewPortRight", "rear_viewPortTop", "rear_viewPortBottom",
-                "right_viewPortLeft", "right_viewPortRight", "right_viewPortTop", "right_viewPortBottom",
-                "left_viewPortLeft", "left_viewPortRight", "left_viewPortTop", "left_viewPortBottom"];
+            let sliderAttributes = ["rearviewMirror", "rightMirror", "leftMirror"];
+            let sliderPrefix = ["rear", "right", "left"];
+            let sliderElems = ["viewPortLeft", "viewPortRight", "viewPortTop", "viewPortBottom"];
 
             let numElems = inputAttributes.length;
             for(let i=0; i<numElems; ++i) {
@@ -100,20 +99,24 @@ $(document).ready( () => {
             }
 
             //Set up sliders
-            let sliders = [];
-            let slider, numSliderElems = sliderElems.length;
-            for(slider=0; slider<numSliderElems; ++slider) {
-                sliders.push($("#" + sliderElems[slider]).slider());
+            let i, sliders = [], numSliderArrays = sliderAttributes.length;
+            for(i=0; i<numSliderArrays; ++i) {
+                sliders.push([]);
+            }
+            let slider, numSliderElems = sliderElems.length, prefix;
+            for(i=0; i<numSliderArrays; ++i) {
+                prefix = sliderPrefix[i];
+                for(slider=0; slider<numSliderElems; ++slider) {
+                    sliders[i].push($("#" + prefix + "_" + sliderElems[slider]).slider());
+                }
             }
 
             let numSliders = sliderAttributes.length;
             for(let slider=0; slider<numSliders; ++slider) {
                 $("#set" + sliderAttributes[slider]).on("click", () => {
-                    attributeManager.setSliderProperty(xmlData, sliderAttributes[slider], sliders, sliderElems);
+                    attributeManager.setSliderProperty(xmlData, sliderAttributes[slider], sliders[slider], sliderElems);
                 })
             }
-
-
 
             $("#saveFile").on("click", () => {
                 fileManager.saveFile();
