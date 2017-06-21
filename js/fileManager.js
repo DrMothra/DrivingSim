@@ -42,20 +42,20 @@ class FileManager {
 
         let fileUrl = window.URL.createObjectURL(dataFile);
         this.dataLoader.load(fileUrl, data => {
-            this.xmlFile = $.parseXML(data);
+            this.xmlData = $.parseXML(data);
             if(callback) {
-                callback(this.xmlFile);
+                callback(this.xmlData);
             }
         })
     }
 
     validateFile(fileInfo) {
-        if(!this.xmlFile) {
-            console.log("No XML file!");
+        if(!this.xmlData) {
+            console.log("No XML data!");
             return false;
         }
 
-        let xmlDoc = $(this.xmlFile);
+        let xmlDoc = $(this.xmlData);
         let type = fileInfo.type;
         let status = $('#' + type + 'Status');
         let valid = xmlDoc.find(fileInfo.validation).length;
@@ -66,5 +66,18 @@ class FileManager {
         }
 
         return true;
+    }
+
+    saveFile() {
+        let s = new XMLSerializer();
+        let serialData = s.serializeToString(this.xmlData);
+
+        let bb = window.Blob;
+        let filename = "testData.xml";
+        saveAs(new bb(
+            [serialData]
+            , {type: "text/plain;charset=" + document.characterSet}
+            )
+            , filename);
     }
 }

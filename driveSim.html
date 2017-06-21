@@ -16,7 +16,8 @@
     <script type="text/javascript" src="js/FileSaver.js"></script>
     <script type="text/javascript" src="js/dataLoader.js"></script>
     <script type="text/javascript" src="js/fileManager.js"></script>
-    <script type="text/javascript" src="js/driveSim.js?v=0.3"></script>
+    <script type="text/javascript" src="js/attributeManager.js"></script>
+    <script type="text/javascript" src="js/driveSim.js?v=0.4"></script>
 
 </head>
 <body>
@@ -111,36 +112,36 @@
                 <p>Rear view</p>
                 <form class="form-horizontal" autocomplete="off">
                     <div class="form-group">
-                        <label for="viewPortLeft" class="col-md-1 control-label">View port left</label>
+                        <label for="rear_viewPortLeft" class="col-md-1 control-label">View port left</label>
                         <div class="col-md-5">
-                            <input id="viewPortLeft" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+                            <input id="rear_viewPortLeft" data-slider-id='ex1Slider' type="text" data-slider-min="0"
                                    data-slider-max="1" data-slider-step="0.1" data-slider-value="0.25"/>
                         </div>
                     </div>
                 </form>
                 <form class="form-horizontal" autocomplete="off">
                     <div class="form-group">
-                        <label for="viewPortRight" class="col-md-1 control-label">View port right</label>
+                        <label for="rear_viewPortRight" class="col-md-1 control-label">View port right</label>
                         <div class="col-md-5">
-                            <input id="viewPortRight" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+                            <input id="rear_viewPortRight" data-slider-id='ex1Slider' type="text" data-slider-min="0"
                                    data-slider-max="1" data-slider-step="0.1" data-slider-value="0.75"/>
                         </div>
                     </div>
                 </form>
                 <form class="form-horizontal" autocomplete="off">
                     <div class="form-group">
-                        <label for="viewPortTop" class="col-md-1 control-label">View port top</label>
+                        <label for="rear_viewPortTop" class="col-md-1 control-label">View port top</label>
                         <div class="col-md-5">
-                            <input id="viewPortTop" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+                            <input id="rear_viewPortTop" data-slider-id='ex1Slider' type="text" data-slider-min="0"
                                    data-slider-max="1" data-slider-step="0.1" data-slider-value="0.9"/>
                         </div>
                     </div>
                 </form>
                 <form class="form-horizontal" autocomplete="off">
                     <div class="form-group">
-                        <label for="viewPortBottom" class="col-md-1 control-label">View port bottom</label>
+                        <label for="rear_viewPortBottom" class="col-md-1 control-label">View port bottom</label>
                         <div class="col-md-5">
-                            <input id="viewPortBottom" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+                            <input id="rear_viewPortBottom" data-slider-id='ex1Slider' type="text" data-slider-min="0"
                                    data-slider-max="1" data-slider-step="0.1" data-slider-value="0.75"/>
                         </div>
                     </div>
@@ -148,6 +149,92 @@
                 <div class="feedback col-md-offset-1">
                     <button id="setrearviewMirror" type="button" class="btn btn-primary">Set</button>
                     <span id="rearviewMirrorStatus" class="label label-success"></span>
+                </div>
+            </div>
+            <div>
+                <p>Right view</p>
+                <form class="form-horizontal" autocomplete="off">
+                    <div class="form-group">
+                        <label for="right_viewPortLeft" class="col-md-1 control-label">View port left</label>
+                        <div class="col-md-5">
+                            <input id="right_viewPortLeft" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+                                   data-slider-max="1" data-slider-step="0.1" data-slider-value="0.25"/>
+                        </div>
+                    </div>
+                </form>
+                <form class="form-horizontal" autocomplete="off">
+                    <div class="form-group">
+                        <label for="right_viewPortRight" class="col-md-1 control-label">View port right</label>
+                        <div class="col-md-5">
+                            <input id="right_viewPortRight" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+                                   data-slider-max="1" data-slider-step="0.1" data-slider-value="0.75"/>
+                        </div>
+                    </div>
+                </form>
+                <form class="form-horizontal" autocomplete="off">
+                    <div class="form-group">
+                        <label for="right_viewPortTop" class="col-md-1 control-label">View port top</label>
+                        <div class="col-md-5">
+                            <input id="right_viewPortTop" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+                                   data-slider-max="1" data-slider-step="0.1" data-slider-value="0.9"/>
+                        </div>
+                    </div>
+                </form>
+                <form class="form-horizontal" autocomplete="off">
+                    <div class="form-group">
+                        <label for="right_viewPortBottom" class="col-md-1 control-label">View port bottom</label>
+                        <div class="col-md-5">
+                            <input id="right_viewPortBottom" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+                                   data-slider-max="1" data-slider-step="0.1" data-slider-value="0.75"/>
+                        </div>
+                    </div>
+                </form>
+                <div class="feedback col-md-offset-1">
+                    <button id="setrightviewMirror" type="button" class="btn btn-primary">Set</button>
+                    <span id="rightviewMirrorStatus" class="label label-success"></span>
+                </div>
+            </div>
+            <div>
+                <p>Left view</p>
+                <form class="form-horizontal" autocomplete="off">
+                    <div class="form-group">
+                        <label for="left_viewPortLeft" class="col-md-1 control-label">View port left</label>
+                        <div class="col-md-5">
+                            <input id="left_viewPortLeft" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+                                   data-slider-max="1" data-slider-step="0.1" data-slider-value="0.25"/>
+                        </div>
+                    </div>
+                </form>
+                <form class="form-horizontal" autocomplete="off">
+                    <div class="form-group">
+                        <label for="left_viewPortRight" class="col-md-1 control-label">View port right</label>
+                        <div class="col-md-5">
+                            <input id="left_viewPortRight" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+                                   data-slider-max="1" data-slider-step="0.1" data-slider-value="0.75"/>
+                        </div>
+                    </div>
+                </form>
+                <form class="form-horizontal" autocomplete="off">
+                    <div class="form-group">
+                        <label for="left_viewPortTop" class="col-md-1 control-label">View port top</label>
+                        <div class="col-md-5">
+                            <input id="left_viewPortTop" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+                                   data-slider-max="1" data-slider-step="0.1" data-slider-value="0.9"/>
+                        </div>
+                    </div>
+                </form>
+                <form class="form-horizontal" autocomplete="off">
+                    <div class="form-group">
+                        <label for="left_viewPortBottom" class="col-md-1 control-label">View port bottom</label>
+                        <div class="col-md-5">
+                            <input id="left_viewPortBottom" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+                                   data-slider-max="1" data-slider-step="0.1" data-slider-value="0.75"/>
+                        </div>
+                    </div>
+                </form>
+                <div class="feedback col-md-offset-1">
+                    <button id="setleftviewMirror" type="button" class="btn btn-primary">Set</button>
+                    <span id="leftviewMirrorStatus" class="label label-success"></span>
                 </div>
             </div>
             <div class="feedback col-md-offset-1">

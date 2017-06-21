@@ -4,17 +4,6 @@
 
 let xmlDoc;
 let sliderLeft, sliderRight, sliderTop, sliderBottom;
-function showFileEdit(fileInfo) {
-    //Show project name
-    let type = fileInfo.type;
-    let fileName = $('#' + type + 'InputFile').val();
-    fileName = fileName.split(/(\\|\/)/g).pop();
-    fileName = fileName.substr(0, fileName.length-4);
-    let status = $('#' + type + 'Status');
-    status.html("   " + fileName + "   ");
-    $('#' + type + 'Edit').show();
-}
-
 function onFileLoaded(data, fileInfo) {
     if(!data) {
         alert("No file data!");
@@ -45,49 +34,6 @@ function onFileLoaded(data, fileInfo) {
         */
 }
 
-function validateInput(element) {
-    let input = $("#" + element).val();
-    if(!input) {
-        alert("Enter value!");
-        return false;
-    }
-
-    return true;
-}
-
-function setProperty(xml, element) {
-    xmlDoc = $(xml);
-    let value = $('#'+element).val();
-    let property = xmlDoc.find(element);
-    property.text(value);
-    $('#' + element + "Status").html("Updated");
-    //DEBUG
-    //console.log(property.text());
-}
-
-function setSliderProperty(xml, container, sliders, elements) {
-    xmlDoc = $(xml);
-    let i, sliderValue, numSliders = sliders.length;
-    for(i=0; i<numSliders; ++i) {
-        sliderValue = sliders[i].slider('getValue');
-        xmlDoc.find(elements[i]).first().text(sliderValue);
-    }
-    $('#' + container + "Status").html("Updated");
-}
-
-function saveFile(xml) {
-    let s = new XMLSerializer();
-    let serialData = s.serializeToString(xml);
-
-    let bb = window.Blob;
-    let filename = "testData.xml";
-    saveAs(new bb(
-        [serialData]
-        , {type: "text/plain;charset=" + document.characterSet}
-        )
-        , filename);
-}
-
 function editProjectSettings() {
     $('#mainMenu').hide();
     $('#editProjectSettings').show();
@@ -108,9 +54,9 @@ function backToMainMenu() {
     $('#mainMenu').show();
 }
 
-let fileManager;
 $(document).ready( () => {
-    fileManager = new FileManager();
+    let fileManager = new FileManager();
+    let attributeManager = new AttributeManager();
 
     if(!fileManager.init()) {
         alert("File Manager cannot start!");
@@ -135,19 +81,20 @@ $(document).ready( () => {
                 console.log("Invalid file");
                 return;
             }
-            showFileEdit(fileInfo);
+            attributeManager.showEditControls(fileInfo);
 
             //Set options
             let inputAttributes = ["driverName", "showStats", "mirrorMode"];
             let sliderAttributes = ["rearviewMirror"];
-            let sliderElems = ["viewPortLeft", "viewPortRight", "viewPortTop", "viewPortBottom"];
+            let sliderElems = ["rear_viewPortLeft", "rear_viewPortRight", "rear_viewPortTop", "rear_viewPortBottom",
+                "right_viewPortLeft", "right_viewPortRight", "right_viewPortTop", "right_viewPortBottom",
+                "left_viewPortLeft", "left_viewPortRight", "left_viewPortTop", "left_viewPortBottom"];
 
             let numElems = inputAttributes.length;
             for(let i=0; i<numElems; ++i) {
                 $("#set" + inputAttributes[i]).on("click", () => {
-                    if(validateInput(inputAttributes[i])) {
-                        setProperty(xmlData, inputAttributes[i]);
-                        console.log("Set driver name");
+                    if(attributeManager.validateInput(inputAttributes[i])) {
+                        attributeManager.setProperty(xmlData, inputAttributes[i]);
                     }
                 });
             }
@@ -162,14 +109,14 @@ $(document).ready( () => {
             let numSliders = sliderAttributes.length;
             for(let slider=0; slider<numSliders; ++slider) {
                 $("#set" + sliderAttributes[slider]).on("click", () => {
-                    setSliderProperty(xmlData, sliderAttributes[slider], sliders, sliderElems);
+                    attributeManager.setSliderProperty(xmlData, sliderAttributes[slider], sliders, sliderElems);
                 })
             }
 
 
 
             $("#saveFile").on("click", () => {
-                saveFile(xmlData);
+                fileManager.saveFile();
             });
         });
     });
