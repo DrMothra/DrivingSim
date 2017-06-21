@@ -4,29 +4,6 @@
 
 let xmlDoc;
 let sliderLeft, sliderRight, sliderTop, sliderBottom;
-function convertToXML(data) {
-    if(!data) {
-        alert("No file data!");
-        return undefined;
-    }
-
-    return $.parseXML(data);
-}
-
-function validateFile(xml, fileInfo) {
-    xmlDoc = $(xml);
-    let type = fileInfo.type;
-    let status = $('#' + type + 'Status');
-    let valid = xmlDoc.find(fileInfo.validation).length;
-    if(!valid) {
-        console.log("Invalid project file");
-        status.html("Invalid project file");
-        return false;
-    }
-
-    return true;
-}
-
 function showFileEdit(fileInfo) {
     //Show project name
     let type = fileInfo.type;
@@ -151,15 +128,10 @@ $(document).ready( () => {
     });
 
     $("#settingsFile").on("change", evt => {
-        fileManager.loadFile(evt, data => {
-            let xml = convertToXML(data);
-            if(!xml) {
-                console.log("Invalid file");
-                return;
-            }
+        fileManager.loadFileXML(evt, xmlData => {
             fileInfo.validation = "settings";
             fileInfo.type = "settings";
-            if(!validateFile(xml, fileInfo)) {
+            if(!fileManager.validateFile(fileInfo)) {
                 console.log("Invalid file");
                 return;
             }
@@ -174,7 +146,7 @@ $(document).ready( () => {
             for(let i=0; i<numElems; ++i) {
                 $("#set" + inputAttributes[i]).on("click", () => {
                     if(validateInput(inputAttributes[i])) {
-                        setProperty(xml, inputAttributes[i]);
+                        setProperty(xmlData, inputAttributes[i]);
                         console.log("Set driver name");
                     }
                 });
@@ -190,14 +162,14 @@ $(document).ready( () => {
             let numSliders = sliderAttributes.length;
             for(let slider=0; slider<numSliders; ++slider) {
                 $("#set" + sliderAttributes[slider]).on("click", () => {
-                    setSliderProperty(xml, sliderAttributes[slider], sliders, sliderElems);
+                    setSliderProperty(xmlData, sliderAttributes[slider], sliders, sliderElems);
                 })
             }
 
 
 
             $("#saveFile").on("click", () => {
-                saveFile(xml);
+                saveFile(xmlData);
             });
         });
     });

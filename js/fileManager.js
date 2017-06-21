@@ -29,4 +29,42 @@ class FileManager {
             }
         });
     }
+
+    loadFileXML(event, callback) {
+        this.files = event.target.files;
+        if(this.files.length === 0) {
+            alert("No file specified!");
+            return;
+        }
+
+        let dataFile = this.files[0];
+        window.URL = window.URL || window.webkitURL;
+
+        let fileUrl = window.URL.createObjectURL(dataFile);
+        this.dataLoader.load(fileUrl, data => {
+            this.xmlFile = $.parseXML(data);
+            if(callback) {
+                callback(this.xmlFile);
+            }
+        })
+    }
+
+    validateFile(fileInfo) {
+        if(!this.xmlFile) {
+            console.log("No XML file!");
+            return false;
+        }
+
+        let xmlDoc = $(this.xmlFile);
+        let type = fileInfo.type;
+        let status = $('#' + type + 'Status');
+        let valid = xmlDoc.find(fileInfo.validation).length;
+        if(!valid) {
+            console.log("Invalid project file");
+            status.html("Invalid project file");
+            return false;
+        }
+
+        return true;
+    }
 }
