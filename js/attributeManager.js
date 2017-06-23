@@ -38,10 +38,15 @@ class AttributeManager {
 
     setSliderProperty(xmlData, container, sliders, sliderElements) {
         let xmlDoc = $(xmlData);
+        let containerElem = xmlDoc.find(container);
+        if(!containerElem) {
+            console.log("No container elem!");
+            return;
+        }
         let i, sliderValue, numSliders = sliders.length;
         for(i=0; i<numSliders; ++i) {
             sliderValue = sliders[i].slider('getValue');
-            xmlDoc.find(sliderElements[i]).first().text(sliderValue);
+            containerElem.find(sliderElements[i]).first().text(sliderValue);
         }
         $('#' + container + "Status").html("Updated");
     }
