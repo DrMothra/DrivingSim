@@ -36,6 +36,7 @@ class PlayBackApp extends BaseApp {
         this.running = false;
         this.simulationTime = 0;
         this.currentIndex = 0;
+        this.sceneloaded = false;
     }
 
     createScene() {
@@ -68,7 +69,12 @@ class PlayBackApp extends BaseApp {
             this.car = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial( {color: 0x686868} ));
             this.car.scale.set(0.1, 0.1, 0.1);
             this.scenes[this.currentScene].add(this.car);
+            this.sceneloaded = true;
         });
+    }
+
+    sceneLoaded() {
+        return this.sceneloaded;
     }
 
     initData(time, pos, rot, speed) {
@@ -77,8 +83,10 @@ class PlayBackApp extends BaseApp {
         this.pos = pos;
         this.rot = rot;
         this.speed = speed;
-        this.car.position.copy(this.pos[this.currentIndex]);
-        this.car.rotation.copy(this.rot[this.currentIndex]);
+        if(this.sceneloaded) {
+            this.car.position.copy(this.pos[this.currentIndex]);
+            this.car.quaternion.copy(this.rot[this.currentIndex]);
+        }
         this.startTime = this.time[this.currentIndex];
         this.nextTime = (this.time[this.currentIndex+1] - this.startTime)/1000;
         this.running = true;
@@ -89,7 +97,7 @@ class PlayBackApp extends BaseApp {
         let delta = this.clock.getDelta();
         this.elapsedTime += delta;
 
-        if(this.running) {
+        if(this.running && this.sceneloaded) {
             this.simulationTime += delta;
             if(this.simulationTime >= this.nextTime) {
                 this.updateSimulation();
@@ -107,7 +115,7 @@ class PlayBackApp extends BaseApp {
             return;
         }
         this.car.position.copy(this.pos[this.currentIndex]);
-        this.car.rotation.copy(this.rot[this.currentIndex]);
+        this.car.quaternion.copy(this.rot[this.currentIndex]);
         let overShoot = this.simulationTime - this.nextTime;
         this.nextTime = (this.time[this.currentIndex] - this.time[this.currentIndex-1])/1000;
         this.simulationTime = overShoot/1000;
@@ -139,7 +147,7 @@ $(document).ready( () => {
         fileManager.loadFile(evt, data => {
             let newData = data.split("\r\n");
             //Fill in details
-            $('#task').html(newData[0]);
+            $('#task').html(newData[0].split(/(\\|\/)/g).pop());
             $('#time').html(newData[1]);
             $('#driver').html(newData[2]);
             $('#taskInfo').show();
