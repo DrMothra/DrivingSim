@@ -6,7 +6,7 @@
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link rel='stylesheet' href="css/driveSimStyles.css?v=0.3">
+    <link rel='stylesheet' href="css/driveSimStyles.css?v=0.4">
 
     <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -16,13 +16,13 @@
     <script type="text/javascript" src="js/FileSaver.js"></script>
     <script type="text/javascript" src="js/dataLoader.js"></script>
     <script type="text/javascript" src="js/BinaryLoader.js"></script>
-    <script type="text/javascript" src="js/baseApp.js?v=0.1"></script>
+    <script type="text/javascript" src="js/baseApp.js?v=0.2"></script>
     <script type="text/javascript" src="js/fileManager.js"></script>
-    <script type="text/javascript" src="js/playBack.js?v=0.8"></script>
+    <script type="text/javascript" src="js/playBack.js?v=0.9"></script>
 
 </head>
 <body>
-    <div id="information" class="indent infoPanel">
+    <div id="loadFile" class="indent infoPanel highlightInfo">
         <h1>Car Simulator Driving Playback</h1>
         <p>
             Select the simulator file you wish to visualise
@@ -30,11 +30,59 @@
         <div>
             <span id="simFile" class="btn btn-primary btn-file">Load Simulation File<input type="file" id="simInputFile"></span>
         </div>
+    </div>
 
+    <div id="information" class="indent infoPanel highlightInfo">
         <div id="taskInfo" class="noDisplay">
             <h3>Task: <span id="task"></span></h3>
             <h3>Time: <span id="time"></span></h3>
             <h3><span id="driver"></span></h3>
+        </div>
+        <button type="button" id="infoToggle" class="btn btn-primary noDisplay">Hide Info</button>
+    </div>
+
+    <div id="camControls" class="infoPanel centred">
+        <div>
+            <button type="button" id="camera0" class="btn btn-primary">Front</button>
+        </div>
+        <div class="container-fluid">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <button type="button" id="camera2" class="btn btn-primary">Left</button>
+                </div>
+                <div class="col-md-4">
+                    <img src="images/camera.png">
+                </div>
+                <div class="col-md-4">
+                    <button type="button" id="camera3" class="btn btn-primary">Right</button>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button type="button" id="camera1" class="btn btn-primary">Back</button>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <button type="button" id="rotateClock" class="btn btn-primary"><img src="images/rotate3DClock.png"></button>
+                </div>
+                <div class="col-md-6">
+                    <button type="button" id="rotateAnti" class="btn btn-primary"><img src="images/rotate3DAnti.png"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="playBackControls" class="infoPanel">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <img id="playPause" src="images/play-button.png">
+                </div>
+                <div class="col-md-6">
+                    <img id="rewind" src="images/rewind-button.png">
+                </div>
+            </div>
         </div>
     </div>
 

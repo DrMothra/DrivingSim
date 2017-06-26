@@ -1,5 +1,9 @@
 /* Framework styles */
 
+body {
+    margin: 0px;
+    overflow: hidden;
+}
 .noDisplay {
     display: none;
 }
@@ -31,6 +35,15 @@
     cursor: inherit;
     display: block;
 }
+.row.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+}
+.row.no-gutters > [class^="col-"],
+.row.no-gutters > [class*=" col-"] {
+    padding-right: 0;
+    padding-left: 0;
+}
 .optionDisplay div {
     margin-bottom: 2%;
 }
@@ -41,8 +54,30 @@
     font-size: 0.9vw;
     margin-left: 1%;
 }
-#information {
+.highlightInfo {
+    color: #d6d6d6;
+}
+#loadFile {
     top: 1%;
     left: 1%;
-    color: #d6d6d6
+}
+#information {
+    top: 16%;
+    left: 1%;
+}
+#camControls {
+    top: 1%;
+    right:1%;
+    width: 10%;
+}
+#camControls img {
+    width: 75%;
+}
+#playBackControls {
+    top: 20%;
+    right: 1%;
+    width: 10%;
+}
+#playBackControls img {
+    width: 100%;
 }
