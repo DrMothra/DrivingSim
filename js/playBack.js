@@ -94,6 +94,8 @@ class PlayBackApp extends BaseApp {
     }
 
     initData(time, pos, rot, speed) {
+        this.simulationTime = 0;
+        this.currentIndex = 0;
         this.maxIndex = time.length;
         this.time = time;
         this.pos = pos;
@@ -183,6 +185,18 @@ class PlayBackApp extends BaseApp {
         let elem = $('#playPause');
         elem.attr("src", this.running ? "images/pause-button.png" : "images/play-button.png");
     }
+
+    reset() {
+        this.currentIndex = 0;
+        this.startTime = this.time[this.currentIndex];
+        this.nextTime = (this.time[this.currentIndex+1] - this.startTime)/1000;
+        this.simulationTime = 0;
+        this.running = false;
+        this.car.position.copy(this.pos[this.currentIndex]);
+        this.car.quaternion.copy(this.rot[this.currentIndex]);
+        let elem = $('#playPause');
+        elem.attr("src", "images/play-button.png");
+    }
 }
 
 $(document).ready( () => {
@@ -257,6 +271,10 @@ $(document).ready( () => {
 
     $('#playPause').on("click", () => {
         app.toggleRunStatus();
+    });
+
+    $('#rewind').on("click", () => {
+        app.reset();
     });
 
     app.run();
