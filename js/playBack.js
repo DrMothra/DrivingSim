@@ -60,7 +60,9 @@ class PlayBackApp extends BaseApp {
         super.createScene();
 
         //Floor plane
+        /*
         let texLoader = new THREE.TextureLoader();
+
         texLoader.load("./textures/fresh.jpg", texture => {
             let planeGeom = new THREE.PlaneBufferGeometry(1500, 1500, 32, 32);
             let planeMat = new THREE.MeshLambertMaterial( {map: texture} );
@@ -70,7 +72,14 @@ class PlayBackApp extends BaseApp {
             plane.position.z = -500;
             this.scenes[this.currentScene].add(plane);
         });
+        */
 
+
+        this.jsonLoader = new THREE.JSONLoader();
+        this.jsonLoader.load("./models/grassScene.json", (geometry, materials) => {
+            let mesh = new THREE.Mesh(geometry, new THREE.MultiMaterial(materials));
+            this.scenes[this.currentScene].add(mesh);
+        });
 
         //Simulated car
         /*
@@ -80,6 +89,7 @@ class PlayBackApp extends BaseApp {
         this.scenes[this.currentScene].add(this.car);
         */
         //Load in model
+        /*
         this.loader = new THREE.BinaryLoader();
         this.loader.load("./veyron/VeyronNoUv_bin.js", (geometry) => {
             this.car = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial( {color: 0x686868} ));
@@ -87,6 +97,7 @@ class PlayBackApp extends BaseApp {
             this.scenes[this.currentScene].add(this.car);
             this.sceneloaded = true;
         });
+        */
     }
 
     sceneLoaded() {
