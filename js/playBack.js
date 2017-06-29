@@ -78,6 +78,8 @@ class PlayBackApp extends BaseApp {
         this.jsonLoader = new THREE.JSONLoader();
         this.jsonLoader.load("./models/grassScene.json", (geometry, materials) => {
             let mesh = new THREE.Mesh(geometry, new THREE.MultiMaterial(materials));
+            mesh.position.y = -5;
+            mesh.position.z = -2500;
             this.scenes[this.currentScene].add(mesh);
         });
 
@@ -89,7 +91,7 @@ class PlayBackApp extends BaseApp {
         this.scenes[this.currentScene].add(this.car);
         */
         //Load in model
-        /*
+
         this.loader = new THREE.BinaryLoader();
         this.loader.load("./veyron/VeyronNoUv_bin.js", (geometry) => {
             this.car = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial( {color: 0x686868} ));
@@ -97,7 +99,7 @@ class PlayBackApp extends BaseApp {
             this.scenes[this.currentScene].add(this.car);
             this.sceneloaded = true;
         });
-        */
+
     }
 
     sceneLoaded() {
