@@ -8,12 +8,13 @@ function getTime(time) {
     return parseFloat(time);
 }
 
+const SCALE_FACTOR = 3;
 function getPosition(x, y, z) {
     let newX = parseFloat(x);
     let newY = parseFloat(y);
     let newZ = parseFloat(z);
 
-    return new THREE.Vector3(newX, newY, newZ);
+    return new THREE.Vector3(newX/SCALE_FACTOR, newY, newZ/SCALE_FACTOR);
 }
 
 function getRotation(x, y, z, w) {
@@ -40,6 +41,7 @@ class PlayBackApp extends BaseApp {
         this.currentIndex = 0;
         this.sceneloaded = false;
         this.fileLoaded = false;
+        this.scaleFactor = 1/3;
         //Camera views
         this.camViews = [
             new THREE.Vector3(0, 400, -400), //Front
@@ -58,6 +60,20 @@ class PlayBackApp extends BaseApp {
     createScene() {
         //Init base createsScene
         super.createScene();
+
+        //DEBUG
+        let geom = new THREE.BoxGeometry(3, 3, 3);
+        let mat = new THREE.MeshLambertMaterial( {color: 0xff0000});
+        let box = new THREE.Mesh(geom, mat);
+        //this.scenes[this.currentScene].add(box);
+
+        //Ogre loader - DEBUG
+        /*
+        let ogreLoader = new THREE.XMLOgreLoader();
+        ogreLoader.load("./models/Car.scene", object => {
+            this.scenes[this.currentScene].add(object);
+        });
+        */
 
         //Floor plane
         /*
@@ -79,7 +95,7 @@ class PlayBackApp extends BaseApp {
         this.jsonLoader.load("./models/grassScene.json", (geometry, materials) => {
             let mesh = new THREE.Mesh(geometry, new THREE.MultiMaterial(materials));
             mesh.position.y = -5;
-            mesh.position.z = -2500;
+            mesh.position.z = 0;
             this.scenes[this.currentScene].add(mesh);
         });
 
@@ -95,7 +111,7 @@ class PlayBackApp extends BaseApp {
         this.loader = new THREE.BinaryLoader();
         this.loader.load("./veyron/VeyronNoUv_bin.js", (geometry) => {
             this.car = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial( {color: 0x686868} ));
-            this.car.scale.set(0.1, 0.1, 0.1);
+            this.car.scale.set(0.01, 0.01, 0.01);
             this.scenes[this.currentScene].add(this.car);
             this.sceneloaded = true;
         });
