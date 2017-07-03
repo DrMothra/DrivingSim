@@ -45,9 +45,9 @@ class PlayBackApp extends BaseApp {
         //Camera views
         this.camViews = [
             new THREE.Vector3(0, 10, 2075), //Front
-            new THREE.Vector3(0, 10, 1500), //Back
-            new THREE.Vector3(-100, 10, 1000), //Left
-            new THREE.Vector3(100, 10, 1000) //Right
+            new THREE.Vector3(0, 10, 1200), //Back
+            new THREE.Vector3(-50, 10, 1500), //Left
+            new THREE.Vector3(50, 10, 1500) //Right
         ];
         let ROT_INC = Math.PI/128;
         this.tempVec = new THREE.Vector3();
@@ -205,7 +205,7 @@ class PlayBackApp extends BaseApp {
         //Alter cam view
         this.controls.reset();
         this.camera.position.copy(this.camViews[index]);
-        this.controls.setLookAt(new THREE.Vector3(0, 0, 700));
+        this.controls.setLookAt(new THREE.Vector3(0, 0, 1500));
     }
 
     rotateCam(direction) {
