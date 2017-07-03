@@ -44,10 +44,10 @@ class PlayBackApp extends BaseApp {
         this.scaleFactor = 1/3;
         //Camera views
         this.camViews = [
-            new THREE.Vector3(0, 400, -400), //Front
-            new THREE.Vector3(0, 400, -1600), //Back
-            new THREE.Vector3(-100, 400, -1200), //Left
-            new THREE.Vector3(100, 400, -1200) //Right
+            new THREE.Vector3(0, 10, 2075), //Front
+            new THREE.Vector3(0, 10, 1500), //Back
+            new THREE.Vector3(-100, 10, 1000), //Left
+            new THREE.Vector3(100, 10, 1000) //Right
         ];
         let ROT_INC = Math.PI/128;
         this.tempVec = new THREE.Vector3();
@@ -110,13 +110,13 @@ class PlayBackApp extends BaseApp {
                 object.position.y = -1;
                 this.scenes[this.currentScene].add(object);
 
-                mtlLoader.load("./models/slipRoad.mtl", materials => {
+                mtlLoader.load("./models/sideRoad.mtl", materials => {
                     //materials.preload();
 
                     objLoader.setMaterials( materials );
                     //objLoader.setPath("./models");
-                    objLoader.load("./models/slipRoad.obj", object => {
-                        object.position.set(-10, -1.05, 2025);
+                    objLoader.load("./models/sideRoad.obj", object => {
+                        object.position.set(1.5, -1.55, 2025);
                         object.rotation.y = Math.PI;
                         this.scenes[this.currentScene].add(object);
                     })
@@ -205,7 +205,7 @@ class PlayBackApp extends BaseApp {
         //Alter cam view
         this.controls.reset();
         this.camera.position.copy(this.camViews[index]);
-        this.controls.setLookAt(new THREE.Vector3(0, 0, -1200));
+        this.controls.setLookAt(new THREE.Vector3(0, 0, 700));
     }
 
     rotateCam(direction) {
