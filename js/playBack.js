@@ -14,7 +14,7 @@ function getPosition(x, y, z) {
     let newY = parseFloat(y);
     let newZ = parseFloat(z);
 
-    return new THREE.Vector3(newX/SCALE_FACTOR, newY, newZ/SCALE_FACTOR);
+    return new THREE.Vector3(newX, newY, newZ);
 }
 
 function getRotation(x, y, z, w) {
@@ -89,14 +89,39 @@ class PlayBackApp extends BaseApp {
             this.scenes[this.currentScene].add(plane);
         });
         */
-
-
+        /*
         this.jsonLoader = new THREE.JSONLoader();
         this.jsonLoader.load("./models/grassScene.json", (geometry, materials) => {
             let mesh = new THREE.Mesh(geometry, new THREE.MultiMaterial(materials));
             mesh.position.y = -5;
             mesh.position.z = 0;
             this.scenes[this.currentScene].add(mesh);
+        });
+        */
+        let mtlLoader = new THREE.MTLLoader();
+        let objLoader = new THREE.OBJLoader();
+        //mtlLoader.setPath("./models");
+        mtlLoader.load("./models/playback.mtl", materials => {
+            //materials.preload();
+
+            objLoader.setMaterials( materials );
+            //objLoader.setPath("./models");
+            objLoader.load("./models/playback.obj", object => {
+                object.position.y = -1;
+                this.scenes[this.currentScene].add(object);
+
+                mtlLoader.load("./models/slipRoad.mtl", materials => {
+                    //materials.preload();
+
+                    objLoader.setMaterials( materials );
+                    //objLoader.setPath("./models");
+                    objLoader.load("./models/slipRoad.obj", object => {
+                        object.position.set(-10, -1.05, 2025);
+                        object.rotation.y = Math.PI;
+                        this.scenes[this.currentScene].add(object);
+                    })
+                });
+            })
         });
 
         //Simulated car
@@ -111,7 +136,8 @@ class PlayBackApp extends BaseApp {
         this.loader = new THREE.BinaryLoader();
         this.loader.load("./veyron/VeyronNoUv_bin.js", (geometry) => {
             this.car = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial( {color: 0x686868} ));
-            this.car.scale.set(0.01, 0.01, 0.01);
+            this.car.scale.set(0.015, 0.015, 0.015);
+            this.car.position.set(-45, 0, 2008);
             this.scenes[this.currentScene].add(this.car);
             this.sceneloaded = true;
         });

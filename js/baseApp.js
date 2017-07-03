@@ -141,7 +141,7 @@ class BaseApp {
 
 
         let pointLight = new THREE.PointLight(0xffffff);
-        pointLight.position.set(0,100,100);
+        pointLight.position.set(0,1000,1500);
         pointLight.name = 'PointLight';
         scene.add(pointLight);
 
