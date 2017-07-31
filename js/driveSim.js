@@ -63,8 +63,6 @@ $(document).ready( () => {
         return;
     }
 
-    let fileInfo = {};
-
     $("#projectFile").on("change", evt => {
         fileManager.loadFile(evt, data => {
             fileInfo.validation = "properties";
@@ -75,46 +73,54 @@ $(document).ready( () => {
 
     $("#settingsFile").on("change", evt => {
         fileManager.loadFileXML(evt, xmlData => {
+            let fileInfo = {};
             fileInfo.validation = "settings";
             fileInfo.type = "settings";
             if(!fileManager.validateFile(fileInfo)) {
-                console.log("Invalid file");
+                alert("Invalid settings file!");
                 return;
             }
             attributeManager.showEditControls(fileInfo);
 
             //Set options
             let inputAttributes = ["driverName", "showStats", "mirrorMode"];
-            let sliderAttributes = ["rearviewMirror", "rightMirror", "leftMirror"];
-            let sliderPrefix = ["rear", "right", "left"];
-            let sliderElems = ["viewPortLeft", "viewPortRight", "viewPortTop", "viewPortBottom"];
+            let sliderContainers = ["rearviewMirror", "leftMirror", "rightMirror"];
+            let sliderPrefix = ["rear", "left", "right"];
+            let sliderElems = ["viewPortLeft", "viewPortRight", "viewPortBottom", "viewPortTop"];
 
             let numElems = inputAttributes.length;
-            for(let i=0; i<numElems; ++i) {
+            //Show existing file settings
+            let i;
+            for(i=0; i<numElems; ++i) {
+                attributeManager.setProperty(xmlData, inputAttributes[i], false);
+            }
+
+            for(i=0; i<numElems; ++i) {
                 $("#set" + inputAttributes[i]).on("click", () => {
                     if(attributeManager.validateInput(inputAttributes[i])) {
-                        attributeManager.setProperty(xmlData, inputAttributes[i]);
+                        attributeManager.saveProperty(xmlData, inputAttributes[i], true);
                     }
                 });
             }
 
             //Set up sliders
-            let i, sliders = [], numSliderArrays = sliderAttributes.length;
-            for(i=0; i<numSliderArrays; ++i) {
+            let sliders = [], numSliderContainers = sliderContainers.length;
+            for(i=0; i<numSliderContainers; ++i) {
                 sliders.push([]);
             }
             let slider, numSliderElems = sliderElems.length, prefix;
-            for(i=0; i<numSliderArrays; ++i) {
+            for(i=0; i<numSliderContainers; ++i) {
                 prefix = sliderPrefix[i];
                 for(slider=0; slider<numSliderElems; ++slider) {
                     sliders[i].push($("#" + prefix + "_" + sliderElems[slider]).slider());
                 }
+                attributeManager.setSliderProperty(xmlData, sliderContainers[i], sliders[i], sliderElems);
             }
 
-            let numSliders = sliderAttributes.length;
+            let numSliders = sliderContainers.length;
             for(let slider=0; slider<numSliders; ++slider) {
-                $("#set" + sliderAttributes[slider]).on("click", () => {
-                    attributeManager.setSliderProperty(xmlData, sliderAttributes[slider], sliders[slider], sliderElems);
+                $("#set" + sliderContainers[slider]).on("slideStop", () => {
+                    attributeManager.saveSliderProperty(xmlData, sliderContainers[slider], sliders[slider], sliderElems);
                 })
             }
 

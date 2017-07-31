@@ -15,9 +15,9 @@
     <script type="text/javascript" src="js/three84.js"></script>
     <script type="text/javascript" src="js/FileSaver.js"></script>
     <script type="text/javascript" src="js/dataLoader.js"></script>
-    <script type="text/javascript" src="js/fileManager.js"></script>
+    <script type="text/javascript" src="js/fileManager.js?v=0.1"></script>
     <script type="text/javascript" src="js/attributeManager.js"></script>
-    <script type="text/javascript" src="js/driveSim.js?v=0.4"></script>
+    <script type="text/javascript" src="js/driveSim.js?v=0.5"></script>
 
 </head>
 <body>
@@ -115,7 +115,7 @@
                         <label for="rear_viewPortLeft" class="col-md-1 control-label">View port left</label>
                         <div class="col-md-5">
                             <input id="rear_viewPortLeft" data-slider-id='ex1Slider' type="text" data-slider-min="0"
-                                   data-slider-max="1" data-slider-step="0.1" data-slider-value="0.25"/>
+                                   data-slider-max="1" data-slider-step="0.01"/>
                         </div>
                     </div>
                 </form>
@@ -124,16 +124,7 @@
                         <label for="rear_viewPortRight" class="col-md-1 control-label">View port right</label>
                         <div class="col-md-5">
                             <input id="rear_viewPortRight" data-slider-id='ex1Slider' type="text" data-slider-min="0"
-                                   data-slider-max="1" data-slider-step="0.1" data-slider-value="0.75"/>
-                        </div>
-                    </div>
-                </form>
-                <form class="form-horizontal" autocomplete="off">
-                    <div class="form-group">
-                        <label for="rear_viewPortTop" class="col-md-1 control-label">View port top</label>
-                        <div class="col-md-5">
-                            <input id="rear_viewPortTop" data-slider-id='ex1Slider' type="text" data-slider-min="0"
-                                   data-slider-max="1" data-slider-step="0.1" data-slider-value="0.9"/>
+                                   data-slider-max="1" data-slider-step="0.01"/>
                         </div>
                     </div>
                 </form>
@@ -142,7 +133,16 @@
                         <label for="rear_viewPortBottom" class="col-md-1 control-label">View port bottom</label>
                         <div class="col-md-5">
                             <input id="rear_viewPortBottom" data-slider-id='ex1Slider' type="text" data-slider-min="0"
-                                   data-slider-max="1" data-slider-step="0.1" data-slider-value="0.75"/>
+                                   data-slider-max="1" data-slider-step="0.01"/>
+                        </div>
+                    </div>
+                </form>
+                <form class="form-horizontal" autocomplete="off">
+                    <div class="form-group">
+                        <label for="rear_viewPortTop" class="col-md-1 control-label">View port top</label>
+                        <div class="col-md-5">
+                            <input id="rear_viewPortTop" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+                                   data-slider-max="1" data-slider-step="0.01"/>
                         </div>
                     </div>
                 </form>
@@ -152,7 +152,7 @@
                 </div>
             </div>
             <div>
-                <p>Right view</p>
+                <p>Left view</p>
                 <form class="form-horizontal" autocomplete="off">
                     <div class="form-group">
                         <label for="right_viewPortLeft" class="col-md-1 control-label">View port left</label>
@@ -173,7 +173,7 @@
                 </form>
                 <form class="form-horizontal" autocomplete="off">
                     <div class="form-group">
-                        <label for="right_viewPortTop" class="col-md-1 control-label">View port top</label>
+                        <label for="right_viewPortTop" class="col-md-1 control-label">View port bottom</label>
                         <div class="col-md-5">
                             <input id="right_viewPortTop" data-slider-id='ex1Slider' type="text" data-slider-min="0"
                                    data-slider-max="1" data-slider-step="0.1" data-slider-value="0.9"/>
@@ -182,7 +182,7 @@
                 </form>
                 <form class="form-horizontal" autocomplete="off">
                     <div class="form-group">
-                        <label for="right_viewPortBottom" class="col-md-1 control-label">View port bottom</label>
+                        <label for="right_viewPortBottom" class="col-md-1 control-label">View port top</label>
                         <div class="col-md-5">
                             <input id="right_viewPortBottom" data-slider-id='ex1Slider' type="text" data-slider-min="0"
                                    data-slider-max="1" data-slider-step="0.1" data-slider-value="0.75"/>
@@ -195,7 +195,7 @@
                 </div>
             </div>
             <div>
-                <p>Left view</p>
+                <p>Right view</p>
                 <form class="form-horizontal" autocomplete="off">
                     <div class="form-group">
                         <label for="left_viewPortLeft" class="col-md-1 control-label">View port left</label>
@@ -216,7 +216,7 @@
                 </form>
                 <form class="form-horizontal" autocomplete="off">
                     <div class="form-group">
-                        <label for="left_viewPortTop" class="col-md-1 control-label">View port top</label>
+                        <label for="left_viewPortTop" class="col-md-1 control-label">View port bottom</label>
                         <div class="col-md-5">
                             <input id="left_viewPortTop" data-slider-id='ex1Slider' type="text" data-slider-min="0"
                                    data-slider-max="1" data-slider-step="0.1" data-slider-value="0.9"/>
@@ -225,7 +225,7 @@
                 </form>
                 <form class="form-horizontal" autocomplete="off">
                     <div class="form-group">
-                        <label for="left_viewPortBottom" class="col-md-1 control-label">View port bottom</label>
+                        <label for="left_viewPortBottom" class="col-md-1 control-label">View port top</label>
                         <div class="col-md-5">
                             <input id="left_viewPortBottom" data-slider-id='ex1Slider' type="text" data-slider-min="0"
                                    data-slider-max="1" data-slider-step="0.1" data-slider-value="0.75"/>

@@ -61,7 +61,7 @@ class FileManager {
         let valid = xmlDoc.find(fileInfo.validation).length;
         if(!valid) {
             console.log("Invalid project file");
-            status.html("Invalid project file");
+            //status.html("Invalid project file");
             return false;
         }
 

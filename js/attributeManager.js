@@ -30,6 +30,13 @@ class AttributeManager {
 
     setProperty(xmlData, attribute) {
         let xmlDoc = $(xmlData);
+        let property = xmlDoc.find(attribute);
+        let value = property.text();
+        $('#'+attribute).val(value);
+    }
+
+    saveProperty(xmlData, attribute) {
+        let xmlDoc = $(xmlData);
         let value = $('#'+attribute).val();
         let property = xmlDoc.find(attribute);
         property.text(value);
@@ -37,6 +44,20 @@ class AttributeManager {
     }
 
     setSliderProperty(xmlData, container, sliders, sliderElements) {
+        let xmlDoc = $(xmlData);
+        let containerElem = xmlDoc.find(container);
+        if(!containerElem) {
+            console.log("No container elem!");
+            return;
+        }
+        let i, sliderValue, numSliders = sliders.length;
+        for(i=0; i<numSliders; ++i) {
+            sliderValue = containerElem.find(sliderElements[i]).first().text();
+            sliders[i].slider('setValue', sliderValue);
+        }
+    }
+
+    saveSliderProperty(xmlData, container, sliders, sliderElements) {
         let xmlDoc = $(xmlData);
         let containerElem = xmlDoc.find(container);
         if(!containerElem) {
